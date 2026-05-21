@@ -21,6 +21,7 @@ Environment:
   MPI=1 or unset              Select MS-MPI mode.
   FC, CC                      Override ifx/cl command names.
   MSMPI_INC, MSMPI_LIB64      MS-MPI SDK include/library roots.
+  NEK_WIN_LINK_MAP=1          Emit a linker map into the Windows build directory.
 "@
 }
 
@@ -144,6 +145,9 @@ $buildParams = @{
 }
 if ($mode -eq "mpi") {
     $buildParams.Mpi = $true
+}
+if ($env:NEK_WIN_LINK_MAP -and $env:NEK_WIN_LINK_MAP -ne "0") {
+    $buildParams.EmitLinkMap = $true
 }
 $buildDirName = if ($mode -eq "mpi") { "obj_win_msmpi" } else { "obj_win_serial" }
 $blasCandidate = Join-Path $caseDir "$buildDirName\blasLapack.lib"

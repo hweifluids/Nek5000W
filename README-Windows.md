@@ -120,6 +120,8 @@ remain available:
 Configuration variables are exposed as script parameters: `-FortranCompiler`,
 `-CCompiler`, `-Librarian`, `-MpiIncludePath`, `-MpiLibraryPath`, `-MpiExec`,
 `-GslibInclude`, `-GslibLib`, `-BlasLib`, and `-BuildDir`.
+Set `NEK_WIN_LINK_MAP=1` before `makenek` to emit an optional Windows linker
+map in the build directory for image-size diagnostics.
 
 Expected Windows artifacts:
 

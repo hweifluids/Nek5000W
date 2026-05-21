@@ -1,16 +1,39 @@
-# compiled objects and libraries
+# compiled objects, libraries, and debug artifacts
 *.log
 *.mod
 *.o
 *.obj
 *.lib
+*.exp
+*.ilk
+*.pdb
+*.dll
 *.exe
+*.manifest
+*.res
+
+# editor and OS noise
+.vscode/
+.vs/
+*.suo
+*.user
+*.swp
+Thumbs.db
+Desktop.ini
 
 # local Codex run logs
 codexlog/
 
 # Windows-native build outputs
 **/obj_win*/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/compile_commands.json
+**/.ninja_deps
+**/.ninja_log
+/build*/
+/install*/
 3rd_party/gslib/build_win_serial/
 3rd_party/gslib_mpi/build_win_msmpi/
 
@@ -31,4 +54,17 @@ bin/prex
 bin/re2torea
 bin/reatore2
 
-__pycache__
+# Nek runtime/output files
+SESSION.NAME
+ioinfo
+logfile
+*.nek5000
+*.f[0-9][0-9][0-9][0-9][0-9]
+*.fld
+*.his
+*.sch
+*.out
+
+# Python caches
+__pycache__/
+*.pyc

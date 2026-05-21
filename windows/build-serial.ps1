@@ -19,6 +19,7 @@ param(
     [string[]]$ExtraFortranFlags = @(),
     [string[]]$ExtraCFlags = @(),
     [string[]]$ExtraLinkFlags = @(),
+    [switch]$EmitLinkMap,
     [switch]$Clean,
     [switch]$CheckOnly
 )
@@ -461,9 +462,14 @@ if ($Mpi -and -not $EnableMpiIo) {
     $cDefines += "/DNOMPIIO"
 }
 
-$fFlagsO2 = @("/nologo", "/fpp", "/real-size:64", "/fpconstant", "/names:lowercase", "/O2") + $ExtraFortranFlags
-$fFlagsO3 = @("/nologo", "/fpp", "/real-size:64", "/fpconstant", "/names:lowercase", "/O3") + $ExtraFortranFlags
-$fFlagsO0 = @("/nologo", "/fpp", "/real-size:64", "/fpconstant", "/names:lowercase", "/Od") + $ExtraFortranFlags
+$dynComBlocks = 'vptsol,gmre1,gmre2,gmres,spltprec,gxyz,giso1,giso2,gisod,gmfact,gsurf,gvolm,mass,solnd,bqcb,vptmsk,cbm2,diverg,input5,input6,input8,input9,inputmi,cbout_mask'
+$fDynCom = @("/Qdyncom`"$dynComBlocks`"")
+Write-Host "Dynamic COMMON:   $dynComBlocks"
+
+$fBaseFlags = @("/nologo", "/fpp", "/real-size:64", "/fpconstant", "/names:lowercase")
+$fFlagsO2 = $fBaseFlags + @("/O2") + $fDynCom + $ExtraFortranFlags
+$fFlagsO3 = $fBaseFlags + @("/O3") + $fDynCom + $ExtraFortranFlags
+$fFlagsO0 = $fBaseFlags + @("/Od") + $fDynCom + $ExtraFortranFlags
 $cFlagsO2 = @("/nologo", "/O2", "/FI$winIncludeDir\msvc_compat.h") + $ExtraCFlags
 
 if (-not $BlasLib) {
@@ -567,7 +573,12 @@ if ($Mpi) {
         $mpiLinkLibs += (Join-Path $MpiLibraryPath $mpiLibName)
     }
 }
-$linkArgs = @("/nologo") + $fFlagsO2 + @("/exe:$exe", $driveObj, $usrObj, $libNek, $GslibLib, $BlasLib) + $mpiLinkLibs + @("Psapi.lib") + $ExtraLinkFlags
+$linkArgs = @("/nologo", "/exe:$exe", $driveObj, $usrObj, $libNek, $GslibLib, $BlasLib) + $mpiLinkLibs + @("Psapi.lib") + $ExtraLinkFlags
+if ($EmitLinkMap) {
+    $mapFile = Join-Path $buildRoot "nek5000.map"
+    $linkArgs += @("/link", "/MAP:$mapFile")
+    Write-Host "Link map:         $mapFile"
+}
 Invoke-Logged -Program $FortranCompiler -Arguments $linkArgs
 
 Write-Host ""
