@@ -1,9 +1,11 @@
 # Nek5000W
 
 The Native Windows implementation of NEK5000.
+
 The platform adaptation is by Huanxia Wei, not by the Nek5000 team.
 Therefore, do not disturb original Nek5000 team for the adaptation bugs of Nek5000W.
-For new feature, functions or new debugs from Nek5000 original repo, if you need an update to obtain them, let me know.
+For new features, functions or new debugs from Nek5000 original repo, if you need an update to obtain them, let me know.
+
 Enjoy your colorful funny drawings, ha.
 
 See windows version of NekRS in my another repo with GPU support.
