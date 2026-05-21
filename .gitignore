@@ -1,0 +1,34 @@
+# compiled objects and libraries
+*.log
+*.mod
+*.o
+*.obj
+*.lib
+*.exe
+
+# local Codex run logs
+codexlog/
+
+# Windows-native build outputs
+**/obj_win*/
+3rd_party/gslib/build_win_serial/
+3rd_party/gslib_mpi/build_win_msmpi/
+
+# tool executables built by running maketools
+bin/cgns2nek
+bin/exo2nek
+bin/genbox
+bin/gencon
+bin/genmap
+bin/gmsh2nek
+bin/n2to3
+bin/nekamg_setup
+bin/nekmerge
+bin/postex
+bin/postx
+bin/pretex
+bin/prex
+bin/re2torea
+bin/reatore2
+
+__pycache__
