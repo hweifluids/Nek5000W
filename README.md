@@ -8,9 +8,6 @@ The platform adaptation is by Huanxia Wei, not by the Nek5000 team.
 Therefore, do not disturb original Nek5000 team for the adaptation bugs of Nek5000W.
 For new features, functions or new debugs from Nek5000 original repo, if you need an update to obtain them, let me know.
 
-Currently, only suggest to use this windows version for demo cases. When large cases with elements higher than 43k (for 8th order. Lower order can run more), some problem presents and makenek crashes. Caused by 2GB+ single array is not supported by windows fortran.
-It is a big project to modify the kernal and solve this basic-layer problem while maintain computational efficiency. I might have time to work out this in the future, but who knows. Nobody pays me, and this repo is not a part of my Phd research, only a hobby to code.
-
 Enjoy your colorful funny drawings, ha.
 
 See windows version of NekRS in my another repo with GPU support.
